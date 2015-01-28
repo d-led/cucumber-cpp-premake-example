@@ -1,12 +1,11 @@
 include 'premake'
 
-required_recipes = {
-	'recipes.cucumber-cpp'
-}
-
-include 'cucumber-cpp-premake'
-
 make_solution 'example'
+
+includedirs {
+	'cucumber-cpp-premake/cppspec/include',
+	'cucumber-cpp-premake/cucumber-cpp/include',
+}
 
 make_console_app('example','features/**.*')
 
