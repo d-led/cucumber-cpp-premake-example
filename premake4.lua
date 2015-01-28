@@ -2,26 +2,32 @@ include 'premake'
 
 make_solution 'example'
 
+cucumber_cpp_root = './cucumber-cpp-premake'
+
+local function cucumber_cpp_path(dir)
+	return path.join(cucumber_cpp_root,dir)
+end
+
 includedirs {
-	'cucumber-cpp-premake/cppspec/include',
-	'cucumber-cpp-premake/cucumber-cpp/include',
+	cucumber_cpp_path('cppspec/include'),
+	cucumber_cpp_path('cucumber-cpp/include'),
 }
 
 ----------------------------------------------------------------------------------------------------------------
 make_static_lib('cucumber-cpp', {
-	'./cucumber-cpp-premake/cucumber-cpp/src/*.cpp',
-	'./cucumber-cpp-premake/cucumber-cpp/src/connectors/wire/*.cpp'
+	cucumber_cpp_path 'cucumber-cpp/src/*.cpp',
+	cucumber_cpp_path 'cucumber-cpp/src/connectors/wire/*.cpp'
 })
-	excludes { './cucumber-cpp-premake/cucumber-cpp/src/main.cpp' }
+	excludes { cucumber_cpp_path 'cucumber-cpp/src/main.cpp' }
 ----------------------------------------------------------------------------------------------------------------
-make_static_lib("cucumber-cpp-main", { "./cucumber-cpp-premake/cucumber-cpp/src/main.cpp" })
+make_static_lib('cucumber-cpp-main', { cucumber_cpp_path 'cucumber-cpp/src/main.cpp' })
 ----------------------------------------------------------------------------------------------------------------
-make_static_lib('cppspec',{'./cucumber-cpp-premake/cppspec/src/*.cpp'} )
+make_static_lib('cppspec',{cucumber_cpp_path 'cppspec/src/*.cpp' } )
 ----------------------------------------------------------------------------------------------------------------
-make_static_lib('cucumber-cpp-cppspec-driver', { './cucumber-cpp-premake/cucumber-cpp/src/drivers/CppSpecDriver.cpp' })
+make_static_lib('cucumber-cpp-cppspec-driver', { cucumber_cpp_path 'cucumber-cpp/src/drivers/CppSpecDriver.cpp' })
 ----------------------------------------------------------------------------------------------------------------
 
-local cucumber_steps = assert( require 'cucumber-cpp-premake/recipes/cucumber-steps' )
+local cucumber_steps = assert( require ( cucumber_cpp_path 'recipes/cucumber-steps' ) )
 
 cucumber_steps.make_cppspec_steps ('example',{'features/**.*'}, '.')
 
@@ -34,10 +40,10 @@ newaction {
 }
 
 newaction {
-	trigger     = "cucumber",
-	description = "run cucumber tests",
+	trigger     = 'cucumber',
+	description = 'run cucumber tests',
 	execute     = function ()
-		local util = assert( require 'cucumber-cpp-premake/recipes/util' )
+		local util = assert( require ( cucumber_cpp_path 'recipes/util' ) )
 		util.start_cucumber {
 			start_in = '.' ,
 			executable = 'example'
