@@ -1,0 +1,6 @@
+[submodule "cucumber-cpp-premake"]
+	path = cucumber-cpp-premake
+	url = https://github.com/d-led/cucumber-cpp-premake.git
+[submodule "premake"]
+	path = premake
+	url = https://github.com/d-led/premake-meta-cpp.git
