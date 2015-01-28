@@ -6,17 +6,37 @@ ifndef config
 endif
 export config
 
-PROJECTS := example
+PROJECTS := cucumber-cpp cucumber-cpp-main cppspec cucumber-cpp-cppspec-driver example
 
 .PHONY: all clean help $(PROJECTS)
 
 all: $(PROJECTS)
 
-example: 
+cucumber-cpp: 
+	@echo "==== Building cucumber-cpp ($(config)) ===="
+	@${MAKE} --no-print-directory -C . -f cucumber-cpp.make
+
+cucumber-cpp-main: 
+	@echo "==== Building cucumber-cpp-main ($(config)) ===="
+	@${MAKE} --no-print-directory -C . -f cucumber-cpp-main.make
+
+cppspec: 
+	@echo "==== Building cppspec ($(config)) ===="
+	@${MAKE} --no-print-directory -C . -f cppspec.make
+
+cucumber-cpp-cppspec-driver: 
+	@echo "==== Building cucumber-cpp-cppspec-driver ($(config)) ===="
+	@${MAKE} --no-print-directory -C . -f cucumber-cpp-cppspec-driver.make
+
+example: cucumber-cpp-main cucumber-cpp cppspec cucumber-cpp-cppspec-driver
 	@echo "==== Building example ($(config)) ===="
 	@${MAKE} --no-print-directory -C . -f example.make
 
 clean:
+	@${MAKE} --no-print-directory -C . -f cucumber-cpp.make clean
+	@${MAKE} --no-print-directory -C . -f cucumber-cpp-main.make clean
+	@${MAKE} --no-print-directory -C . -f cppspec.make clean
+	@${MAKE} --no-print-directory -C . -f cucumber-cpp-cppspec-driver.make clean
 	@${MAKE} --no-print-directory -C . -f example.make clean
 
 help:
@@ -31,6 +51,10 @@ help:
 	@echo "TARGETS:"
 	@echo "   all (default)"
 	@echo "   clean"
+	@echo "   cucumber-cpp"
+	@echo "   cucumber-cpp-main"
+	@echo "   cppspec"
+	@echo "   cucumber-cpp-cppspec-driver"
 	@echo "   example"
 	@echo ""
 	@echo "For more information, see http://industriousone.com/premake/quick-start"
