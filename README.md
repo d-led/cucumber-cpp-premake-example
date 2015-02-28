@@ -3,6 +3,8 @@ cucumber-cpp premake example
 
 This project is intended as a starting point for assessing [cucumber-cpp](https://github.com/cucumber/cucumber-cpp) in order to write BDD-style tests in C++ projects as steps for [cucumber](http://cukes.info/). All dependencies can be easily built for all major platforms using an aggregating meta-build project, [cucumber-cpp-premake](https://github.com/d-led/cucumber-cpp-premake).
 
+[![Build Status](https://travis-ci.org/d-led/cucumber-cpp-premake-example.svg?branch=master)](https://travis-ci.org/d-led/cucumber-cpp-premake-example)
+
 building
 --------
 - Check out the recursive submodules: `premake\premake4 prepare`.
