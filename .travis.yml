@@ -15,5 +15,6 @@ before_install:
   # - premake4 gmake
 
 script:
+  - premake4 prepare
   - make -C Build/linux/gmake config=release64
   - premake4 cucumber
