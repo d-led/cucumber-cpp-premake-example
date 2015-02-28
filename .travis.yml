@@ -6,9 +6,9 @@ before_install:
  - sudo apt-get update -qq
  - sudo apt-get -qq --yes install premake4
  - sudo apt-get -qq --yes install boost1.55
- # - sudo apt-get --yes install lua5.1 luarocks
- # - sudo luarocks install luafilesystem
- # - sudo luarocks install penlight
+ - sudo apt-get --yes install lua5.1 luarocks
+ - sudo luarocks install luafilesystem
+ - sudo luarocks install penlight
  - gem install cucumber #ruby assumed to be installed
 
 # before_script:
