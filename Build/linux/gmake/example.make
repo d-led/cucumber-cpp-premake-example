@@ -31,7 +31,7 @@ ifeq ($(config),debug32)
   ALL_RESFLAGS  += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   ALL_LDFLAGS   += $(LDFLAGS) -L../../../bin/linux/gmake/x32/Debug -L. -m32 -L/usr/lib32
   LDDEPS    += ../../../bin/linux/gmake/x32/Debug/libcucumber-cpp-main.a ../../../bin/linux/gmake/x32/Debug/libcucumber-cpp.a ../../../bin/linux/gmake/x32/Debug/libcppspec.a ../../../bin/linux/gmake/x32/Debug/libcucumber-cpp-cppspec-driver.a
-  LIBS      += $(LDDEPS) -lboost_system -lboost_regex -lboost_chrono -lboost_thread
+  LIBS      += $(LDDEPS) -lboost_system -lboost_regex -lboost_chrono -lboost_thread -lpthread
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ARCH) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -53,7 +53,7 @@ ifeq ($(config),release32)
   ALL_RESFLAGS  += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   ALL_LDFLAGS   += $(LDFLAGS) -L../../../bin/linux/gmake/x32/Release -L. -s -m32 -L/usr/lib32
   LDDEPS    += ../../../bin/linux/gmake/x32/Release/libcucumber-cpp-main.a ../../../bin/linux/gmake/x32/Release/libcucumber-cpp.a ../../../bin/linux/gmake/x32/Release/libcppspec.a ../../../bin/linux/gmake/x32/Release/libcucumber-cpp-cppspec-driver.a
-  LIBS      += $(LDDEPS) -lboost_system -lboost_regex -lboost_chrono -lboost_thread
+  LIBS      += $(LDDEPS) -lboost_system -lboost_regex -lboost_chrono -lboost_thread -lpthread
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ARCH) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -75,7 +75,7 @@ ifeq ($(config),debug64)
   ALL_RESFLAGS  += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   ALL_LDFLAGS   += $(LDFLAGS) -L../../../bin/linux/gmake/x64/Debug -L. -m64 -L/usr/lib64
   LDDEPS    += ../../../bin/linux/gmake/x64/Debug/libcucumber-cpp-main.a ../../../bin/linux/gmake/x64/Debug/libcucumber-cpp.a ../../../bin/linux/gmake/x64/Debug/libcppspec.a ../../../bin/linux/gmake/x64/Debug/libcucumber-cpp-cppspec-driver.a
-  LIBS      += $(LDDEPS) -lboost_system -lboost_regex -lboost_chrono -lboost_thread
+  LIBS      += $(LDDEPS) -lboost_system -lboost_regex -lboost_chrono -lboost_thread -lpthread
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ARCH) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -97,7 +97,7 @@ ifeq ($(config),release64)
   ALL_RESFLAGS  += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   ALL_LDFLAGS   += $(LDFLAGS) -L../../../bin/linux/gmake/x64/Release -L. -s -m64 -L/usr/lib64
   LDDEPS    += ../../../bin/linux/gmake/x64/Release/libcucumber-cpp-main.a ../../../bin/linux/gmake/x64/Release/libcucumber-cpp.a ../../../bin/linux/gmake/x64/Release/libcppspec.a ../../../bin/linux/gmake/x64/Release/libcucumber-cpp-cppspec-driver.a
-  LIBS      += $(LDDEPS) -lboost_system -lboost_regex -lboost_chrono -lboost_thread
+  LIBS      += $(LDDEPS) -lboost_system -lboost_regex -lboost_chrono -lboost_thread -lpthread
   LINKCMD    = $(CXX) -o $(TARGET) $(OBJECTS) $(RESOURCES) $(ARCH) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
   endef
@@ -108,7 +108,7 @@ ifeq ($(config),release64)
 endif
 
 OBJECTS := \
-	$(OBJDIR)/simple_steps.o \
+	$(OBJDIR)/cppspec-steps.o \
 
 RESOURCES := \
 
@@ -168,7 +168,7 @@ $(GCH): $(PCH)
 	$(SILENT) $(CXX) -x c++-header $(ALL_CXXFLAGS) -MMD -MP $(DEFINES) $(INCLUDES) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
 endif
 
-$(OBJDIR)/simple_steps.o: ../../../features/step_definitions/simple_steps.cpp
+$(OBJDIR)/cppspec-steps.o: ../../../src/cppspec-steps.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF $(@:%.o=%.d) -c "$<"
 
