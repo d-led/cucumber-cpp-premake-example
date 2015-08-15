@@ -1,20 +1,34 @@
 language: cpp
 
-before_install:
- - sudo add-apt-repository -y ppa:boost-latest/ppa
- - sudo add-apt-repository  --yes "ppa:codegear/release"
- - sudo apt-get update -qq
- - sudo apt-get -qq --yes install premake4
- - sudo apt-get -qq --yes install boost1.55
- - sudo apt-get --yes install lua5.1 luarocks
- - sudo luarocks install luafilesystem
- - sudo luarocks install penlight
- - gem install cucumber #ruby assumed to be installed
+sudo: false
 
-# before_script:
-  # - premake4 gmake
+compiler:
+  - clang
+  - gcc
+
+addons:
+  apt:
+    sources:
+      - boost-latest
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-5
+      - libboost1.55-all-dev
+      - liblua5.1-0-dev
+      - lua5.1
+      - luarocks
+      - rubygems
+
+cache:
+  - apt
+
+before_script:
+  - luarocks --local install busted
+  - luarocks --local install luafilesystem
+  - luarocks --local install penlight
+  - gem install cucumber
 
 script:
-  - premake4 prepare
+  - git submodule update --init --recursive
   - make -C Build/linux/gmake config=release64
-  - premake4 cucumber
+  - ./premake/premake4-64 cucumber
