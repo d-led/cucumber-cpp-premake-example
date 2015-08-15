@@ -27,6 +27,7 @@ before_script:
   - luarocks --local install luafilesystem
   - luarocks --local install penlight
   - gem install cucumber
+  - git submodule update --init --recursive
 
 script:
   - export LUA_PATH='/usr/local/share/lua/5.1//?.lua;/usr/local/share/lua/5.1//?/init.lua;/home/travis/.luarocks/share/lua/5.1//?.lua;/home/travis/.luarocks/share/lua/5.1//?/init.lua;/usr/share/lua/5.1//?.lua;/usr/share/lua/5.1//?/init.lua;./?.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua;/usr/share/lua/5.1/?.lua;/usr/share/lua/5.1/?/init.lua'
