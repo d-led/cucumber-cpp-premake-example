@@ -4,7 +4,7 @@ sudo: false
 
 compiler:
   - clang
-  # - gcc
+  # - gcc # no extra value at the moment
 
 addons:
   apt:
