@@ -22,6 +22,7 @@ cache:
   - apt
 
 before_script:
+  - luarocks path --bin
   - luarocks --local install busted
   - luarocks --local install luafilesystem
   - luarocks --local install penlight
