@@ -34,4 +34,4 @@ script:
   - export LUA_PATH='/usr/local/share/lua/5.1//?.lua;/home/travis/.luarocks/?.lua;/usr/local/share/lua/5.1//?/init.lua;/home/travis/.luarocks/share/lua/5.1//?.lua;/home/travis/.luarocks/share/lua/5.1//?/init.lua;/usr/share/lua/5.1//?.lua;/usr/share/lua/5.1//?/init.lua;./?.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua;/usr/share/lua/5.1/?.lua;/usr/share/lua/5.1/?/init.lua'
   - export LUA_CPATH='/usr/local/lib/lua/5.1//?.so;/home/travis/.luarocks/?.so;/home/travis/.luarocks/lib/lua/5.1//?.so;./?.so;/usr/local/lib/lua/5.1/?.so;/usr/lib/x86_64-linux-gnu/lua/5.1/?.so;/usr/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/loadall.so'
   - make -C Build/linux/gmake config=release64
-  - ./premake/premake4-64 cucumber
+  - linux/gmake/x64/Release/example > /dev/null & cucumber
